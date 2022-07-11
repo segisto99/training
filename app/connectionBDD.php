@@ -1,12 +1,8 @@
 <?php 
-$con= new mysqli("mysql_db","project","project","mysql") 
+$connect= new mysqli("project","project","project","project");
 
-if($con)
+if($connect->connect_error)
 {
-    echo "Connected !!"
-}
-else
-{
-    echo "Erreur"
+    echo "Connection failed". $con->connect_error;
 }
 ?> 

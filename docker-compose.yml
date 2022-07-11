@@ -1,24 +1,37 @@
 version: '3.8'
 
 services:
-  php-env:
-    build: ./app
+  web:
+    build: 
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: php8
+    depends_on:
+      - project
     volumes:
-      - ./src:/var/www/html
+      - ./app:/var/www/html
     ports:
       - 9000:80
-  mysql_db:
-    image: mysql:latest
+  project:
+    container_name: mysql8
+    image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: project
+      MYSQL_DATABASE: project
+      MYSQL_USER: project
+      MYSQL_PASSWORD: project
+    ports:
+      - 6034:3306
   
   
   phpmyadmin:
-    image: phpmyadmin:latest
-    restart: always
+    image: phpmyadmin:5.2.0-apache
     ports:
-      - 9001:80
+        - '9001:80'
+    restart: always
     environment:
-      - PMA_ARBITRARY=1
+        PMA_HOST: mysql8
+    depends_on:
+        - project
