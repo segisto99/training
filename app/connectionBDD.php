@@ -1,5 +1,5 @@
 <?php 
-$connect= new mysqli("project","project","project","project");
+$connect= new mysqli("bd","project","project","project");
 
 if($connect->connect_error)
 {

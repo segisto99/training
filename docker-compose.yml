@@ -7,31 +7,30 @@ services:
       dockerfile: Dockerfile
     container_name: php8
     depends_on:
-      - project
+      - bd
     volumes:
       - ./app:/var/www/html
     ports:
       - 9000:80
-  project:
-    container_name: mysql8
+  bd:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: mysql
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: project
-      MYSQL_DATABASE: project
-      MYSQL_USER: project
-      MYSQL_PASSWORD: project
     ports:
       - 6034:3306
   
   
   phpmyadmin:
     image: phpmyadmin:5.2.0-apache
+    container_name: adminbd
     ports:
         - '9001:80'
     restart: always
     environment:
-        PMA_HOST: mysql8
+        PMA_HOST: mysql
     depends_on:
-        - project
+        - bd
