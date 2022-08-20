@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    // Docker credentails
+    // Docker credentails test
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('segisto-dockerhub')
 	}
