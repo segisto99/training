@@ -79,9 +79,9 @@ pipeline {
 
 			steps {
 				sh 'docker ps'
-				sh 'docker tag continuous-delivery-pharmacie_mysql:latest segisto/mysql_images:1.0'
-                		sh 'docker tag continuous-delivery-pharmacie_http:latest segisto/http_images:1.0'
-				sh 'docker tag phpmyadmin segisto/phpmyadmin_images:1.0'
+				sh 'docker tag mysql:8.0  segisto/mysql_images:1.0'
+                		sh 'docker tag continuous-delivery-pharmacie_web:latest segisto/http_images:1.0'
+				sh 'docker tag phpmyadmin:5.2.0-apache  segisto/phpmyadmin_images:1.0'
           
 			}
 		}
